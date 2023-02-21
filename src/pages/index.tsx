@@ -77,7 +77,7 @@ export default function Home() {
           <p className="p-4">
             Sign up to learn more and be the first one to test Bstro.
           </p>
-          <div className="mb-8 items-center p-4">
+          <div className="mb-8 items-center p-8">
             {sent ? 'Thank you for email!' : ''}
             {submitting ? 'Sending...' : ''}
             {!sent && !submitting ? (
