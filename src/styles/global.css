@@ -19,3 +19,9 @@ a:hover {
 .content ul {
   @apply my-6;
 }
+
+
+@font-face {
+  font-family: ProximaBold;
+  src: url("./FontsFree-Net-Proxima-Nova-Xbold.otf") format("opentype");
+}

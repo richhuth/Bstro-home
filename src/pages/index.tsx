@@ -1,186 +1,118 @@
-import { useRouter } from 'next/router';
+import Head from 'next/head';
+import Image from 'next/image';
+import { useRef, useState } from 'react';
 
-import { Meta } from '@/layouts/Meta';
-import { Main } from '@/templates/Main';
+function getFormData(object: any) {
+  const formData = new FormData();
+  Object.keys(object).forEach((key) => formData.append(key, object[key]));
+  return formData;
+}
 
-const Index = () => {
-  const router = useRouter();
+export default function Home() {
+  const [email, setEmail] = useState('');
+
+  const formRef = useRef(null);
+  const scriptUrl =
+    'https://script.google.com/macros/s/AKfycbwURb6eyYzm3O92yyemA0NIWkr5DQiLexcaK4ORY1tzOo5y1kYscNs19IanWAOBhYTKcA/exec';
+  const [submitting, setSubmitting] = useState(false);
+  const [sent, setSent] = useState(false);
+
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    setSubmitting(true);
+
+    // console.log(email);
+
+    const formData = getFormData({ email });
+
+    fetch(scriptUrl, {
+      method: 'POST',
+      body: formData,
+    })
+      .then((res) => {
+        console.log(res);
+        // console.log('SUCCESSFULLY SUBMITTED');
+        setSent(true);
+        setSubmitting(false);
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
-    <Main
-      meta={
-        <Meta
-          title="Next.js Boilerplate Presentation"
-          description="Next js Boilerplate is the perfect starter code for your project. Build your React application with the Next.js framework."
-        />
-      }
-    >
-      <a href="https://github.com/ixartz/Next-js-Boilerplate">
-        <img
-          src={`${router.basePath}/assets/images/nextjs-starter-banner.png`}
-          alt="Nextjs starter banner"
-        />
-      </a>
-      <h2 className="text-2xl font-bold">
-        Boilerplate code for your Nextjs project with Tailwind CSS
-      </h2>
-      <p>
-        <span role="img" aria-label="rocket">
-          🚀
-        </span>{' '}
-        Next.js Boilerplate is a starter code for your Next js project by
-        putting developer experience first .{' '}
-        <span role="img" aria-label="zap">
-          ⚡️
-        </span>{' '}
-        Made with Next.js, TypeScript, ESLint, Prettier, Husky, Lint-Staged,
-        VSCode, Netlify, PostCSS, Tailwind CSS.
-      </p>
-      <h3 className="text-lg font-semibold">Next js Boilerplate Features</h3>
-      <p>Developer experience first:</p>
-      <ul>
-        <li>
-          <span role="img" aria-label="fire">
-            🔥
-          </span>{' '}
-          <a href="https://nextjs.org" rel="nofollow">
-            Next.js
-          </a>{' '}
-          for Static Site Generator
-        </li>
-        <li>
-          <span role="img" aria-label="art">
-            🎨
-          </span>{' '}
-          Integrate with{' '}
-          <a href="https://tailwindcss.com" rel="nofollow">
-            Tailwind CSS
-          </a>
-        </li>
-        <li>
-          <span role="img" aria-label="nail_care">
-            💅
-          </span>{' '}
-          PostCSS for processing Tailwind CSS
-        </li>
-        <li>
-          <span role="img" aria-label="tada">
-            🎉
-          </span>{' '}
-          Type checking Typescript
-        </li>
-        <li>
-          <span role="img" aria-label="pencil2">
-            ✏️
-          </span>{' '}
-          Linter with{' '}
-          <a href="https://eslint.org" rel="nofollow">
-            ESLint
-          </a>
-        </li>
-        <li>
-          <span role="img" aria-label="hammer_and_wrench">
-            🛠
-          </span>{' '}
-          Code Formatter with{' '}
-          <a href="https://prettier.io" rel="nofollow">
-            Prettier
-          </a>
-        </li>
-        <li>
-          <span role="img" aria-label="fox_face">
-            🦊
-          </span>{' '}
-          Husky for Git Hooks
-        </li>
-        <li>
-          <span role="img" aria-label="no_entry_sign">
-            🚫
-          </span>{' '}
-          Lint-staged for running linters on Git staged files
-        </li>
-        <li>
-          <span role="img" aria-label="no_entry_sign">
-            🗂
-          </span>{' '}
-          VSCode configuration: Debug, Settings, Tasks and extension for
-          PostCSS, ESLint, Prettier, TypeScript
-        </li>
-        <li>
-          <span role="img" aria-label="robot">
-            🤖
-          </span>{' '}
-          SEO metadata, JSON-LD and Open Graph tags with Next SEO
-        </li>
-        <li>
-          <span role="img" aria-label="robot">
-            ⚙️
-          </span>{' '}
-          <a
-            href="https://www.npmjs.com/package/@next/bundle-analyzer"
-            rel="nofollow"
-          >
-            Bundler Analyzer
-          </a>
-        </li>
-        <li>
-          <span role="img" aria-label="rainbow">
-            🌈
-          </span>{' '}
-          Include a FREE minimalist theme
-        </li>
-        <li>
-          <span role="img" aria-label="hundred">
-            💯
-          </span>{' '}
-          Maximize lighthouse score
-        </li>
-      </ul>
-      <p>Built-in feature from Next.js:</p>
-      <ul>
-        <li>
-          <span role="img" aria-label="coffee">
-            ☕
-          </span>{' '}
-          Minify HTML &amp; CSS
-        </li>
-        <li>
-          <span role="img" aria-label="dash">
-            💨
-          </span>{' '}
-          Live reload
-        </li>
-        <li>
-          <span role="img" aria-label="white_check_mark">
-            ✅
-          </span>{' '}
-          Cache busting
-        </li>
-      </ul>
-      <h3 className="text-lg font-semibold">Our Stater code Philosophy</h3>
-      <ul>
-        <li>Minimal code</li>
-        <li>SEO-friendly</li>
-        <li>
-          <span role="img" aria-label="rocket">
-            🚀
-          </span>{' '}
-          Production-ready
-        </li>
-      </ul>
-      <p>
-        Check our GitHub project for more information about{' '}
-        <a href="https://github.com/ixartz/Next-js-Boilerplate">
-          Nextjs Boilerplate
-        </a>
-        . You can also browse our{' '}
-        <a href="https://creativedesignsguru.com/category/nextjs/">
-          Premium NextJS Templates
-        </a>{' '}
-        on our website to support this project.
-      </p>
-    </Main>
-  );
-};
+    <>
+      <Head>
+        <title>Create Next App</title>
+        <meta name="description" content="Generated by create next app" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <main className="bg-maroon p-4">
+        <div className="flex  items-center justify-center ">
+          <Image
+            src="/logo.png"
+            alt="Next.js Logo"
+            width={180}
+            height={37}
+            priority
+          />
+        </div>
+        <div className=" mx-auto max-w-screen-md text-center text-xl leading-relaxed text-white">
+          <p className="p-4">
+            <span className="font-ProximaBold text-4xl">Ah</span>, the unwieldy
+            lunch budget. Feel like it’s out of control? Well, you’re certainly
+            not the only one. And you’ve come to the right place. Welcome to
+            Bstro.
+          </p>
+          <p className="p-4">
+            <span className="font-ProximaBold text-4xl">A</span> revolutionary
+            experience that will transform and ease your lunch.
+          </p>
+          <p className="p-4">
+            <span className="font-ProximaBold text-4xl">Imagine</span> a world
+            where you can flick through hundreds of meal options around your
+            home or office, pre-book and pay your meal then make your way to the
+            restaurant while the kitchen is fully prepared to welcome you.
+            Convenient. Effortless. Delicious.
+          </p>
 
-export default Index;
+          <p className="p-4">
+            <span className="font-ProximaBold text-4xl">Bstro</span> is a
+            credit-based subscription that helps you discover hundreds of
+            delicious lunch around you while you stay in total control of your
+            eating out budget.
+          </p>
+          <p className="p-4">
+            Sign up to learn more and be the first one to test Bstro.
+          </p>
+          <div className="items-center p-4">
+            {sent ? 'Thank you for email!' : ''}
+            {submitting ? 'Sending...' : ''}
+            {!sent && !submitting ? (
+              <form
+                ref={formRef}
+                onSubmit={handleSubmit}
+                name="google-sheet"
+                className="flex "
+              >
+                <input
+                  type="email"
+                  required
+                  name="email"
+                  id="email"
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="  w-full rounded-l-lg border-y border-l border-gray-200 bg-white px-4 py-2 align-middle text-gray-800 focus:border-gray-500 focus:outline-none"
+                  placeholder="Email address"
+                />
+                <button className=" whitespace-nowrap rounded-r-lg border-gray-200 bg-white px-4 py-2 align-middle font-bold text-maroon hover:bg-gray-100">
+                  Sign up
+                </button>
+              </form>
+            ) : (
+              ''
+            )}
+          </div>
+        </div>
+      </main>
+    </>
+  );
+}
