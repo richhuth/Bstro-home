@@ -96,7 +96,7 @@ export default function Home() {
                   className="  w-full rounded-l-lg border-y border-l border-gray-200 bg-white px-4 py-2 align-middle text-gray-800 focus:border-gray-500 focus:outline-none"
                   placeholder="Email address"
                 />
-                <button className=" whitespace-nowrap rounded-r-lg border-gray-200 bg-white px-4 py-2 align-middle font-bold text-maroon hover:bg-gray-100">
+                <button className="-ml-2 whitespace-nowrap rounded-r-lg border-gray-200 bg-white px-4 py-2 align-middle font-bold text-maroon hover:bg-gray-100">
                   Sign up
                 </button>
               </form>
