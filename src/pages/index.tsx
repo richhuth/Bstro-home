@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import Image from 'next/image';
 import { useRef, useState } from 'react';
 
 function getFormData(object: any) {
@@ -47,14 +46,8 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="bg-maroon p-4">
-        <div className="flex  items-center justify-center ">
-          <Image
-            src="/logo.png"
-            alt="Next.js Logo"
-            width={180}
-            height={37}
-            priority
-          />
+        <div className="flex items-center justify-center font-ProximaBold text-white ">
+          <div className="border p-6 text-6xl text-white">Bstro.</div>
         </div>
         <div className=" mx-auto max-w-screen-md text-center text-xl leading-relaxed text-white">
           <p className="p-4">
